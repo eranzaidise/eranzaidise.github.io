@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Eran Zaidise, Ph.D.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #2a3f5f;
+      --navy-mid:  #3a5078;
+      --blue:      #1a6fa8;
+      --blue-light:#3a8fc4;
+      --teal:      #00a3b4;
+      --sky:       #ddf0f5;
+      --pale:      #f5f8fb;
+      --white:     #ffffff;
+      --ink:       #222830;
+      --muted:     #5a6a7a;
+      --warm:      #e07b20;
+      --rule:      #d8e4ec;
+      --serif: 'Libre Baskerville', Georgia, serif;
+      --sans: 'Source Sans 3', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    /* ── Affiliation bar ── */
+    .affiliation-bar {
+      background: var(--white);
+      border-bottom: 3px solid var(--teal);
+      padding: 0.55rem 4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .affiliation-bar span {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .affiliation-bar .sep { color: #bbb; }
+
+    .affiliation-bar a {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--blue);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .affiliation-bar a:hover {
+      text-decoration: underline;
+      color: var(--teal);
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: #3d4f60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4rem;
+      height: 50px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      display: block;
+      padding: 0 1.2rem;
+      height: 50px;
+      line-height: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-links li a:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+    }
+
+    .nav-links li a.active {
+      color: var(--white);
+      border-bottom: 3px solid var(--teal);
+    }
+
+    /* ── Page header banner ── */
+    .page-banner {
+      background: var(--pale);
+      border-bottom: 1px solid var(--rule);
+      padding: 3rem 5rem;
+    }
+
+    .page-banner .breadcrumb {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-banner h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.1;
+    }
+
+    /* ── Main layout ── */
+    .page-body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* ── Left: contact info ── */
+    .contact-main h2 {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--sky);
+    }
+
+    .contact-main p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-item {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0.8rem;
+      align-items: start;
+    }
+
+    .contact-item-icon {
+      width: 2rem;
+      height: 2rem;
+      background: var(--sky);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .contact-item-icon svg {
+      width: 1rem;
+      height: 1rem;
+      fill: none;
+      stroke: var(--teal);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-item-text strong {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-item-text span,
+    .contact-item-text a {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1.5;
+    }
+
+    .contact-item-text a:hover {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
+    /* ── Right: photo panel ── */
+    .contact-photo-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-photo {
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(42,63,95,0.12);
+    }
+
+    .contact-photo img {
+      width: 100%;
+      display: block;
+    }
+
+    .note-block {
+      background: var(--pale);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 3px 3px 0;
+      padding: 1.2rem 1.5rem;
+    }
+
+    .note-block p {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--navy);
+      padding: 2rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+
+    footer .footer-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: rgba(212,228,247,0.6);
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 1.8rem;
+    }
+
+    footer .footer-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(212,228,247,0.4);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer .footer-links a:hover { color: rgba(212,228,247,0.85); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .affiliation-bar, nav, .page-banner, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .page-body { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; gap: 2.5rem; }
+      .nav-name { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Affiliation bar -->
+  <div class="affiliation-bar">
+    <a href="https://wgalil.ac.il/" target="_blank" rel="noopener">Western Galilee College</a>
+    <span class="sep">|</span>
+    <span>Department of Criminology</span>
+    <span class="sep">|</span>
+    <span>Akko, Israel</span>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-name" href="index.html">Eran Zaidise</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page banner -->
+  <div class="page-banner">
+    <p class="breadcrumb">Contact</p>
+    <h1>Get in Touch</h1>
+  </div>
+
+  <!-- Main content -->
+  <div class="page-body">
+
+    <!-- Left: contact details -->
+    <div class="contact-main">
+
+      <div style="margin-bottom: 2.5rem;">
+        <h2>Let's Connect</h2>
+        <p>I welcome inquiries from students, researchers, journalists, and anyone interested in my work. Whether you have a question about my research, are interested in collaboration, or would like to invite me to speak — feel free to reach out.</p>
+      </div>
+
+      <div class="contact-items">
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <strong>Email</strong>
+            <span>eranz [at] wgalil [dot] ac [dot] il</span>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <strong>Institution</strong>
+            <span>Western Galilee College<br>Department of Criminology<br>Akko, Israel</span>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+    <!-- Right: photo and note -->
+    <div class="contact-photo-panel">
+      <div class="contact-photo">
+        <img src="photo_contact.jpg" alt="Contact Eran Zaidise" />
+      </div>
+      <div class="note-block">
+        <p>Please allow 3–5 business days for a response — unless a major grant deadline looms.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-name">Eran Zaidise, Ph.D.</span>
+    <nav class="footer-links">
+      <a href="about.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+</html>
