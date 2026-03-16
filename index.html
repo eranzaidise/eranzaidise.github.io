@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eran Zaidise, Ph.D. — Political Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #2a3f5f;
+      --navy-mid:  #3a5078;
+      --blue:      #1a6fa8;
+      --blue-light:#3a8fc4;
+      --teal:      #00a3b4;
+      --sky:       #ddf0f5;
+      --pale:      #f5f8fb;
+      --white:     #ffffff;
+      --ink:       #222830;
+      --muted:     #5a6a7a;
+      --warm:      #e07b20;
+      --rule:      #d8e4ec;
+      --serif: 'Libre Baskerville', Georgia, serif;
+      --sans: 'Source Sans 3', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    /* ══════════════════════════════
+       AFFILIATION BAR (like UN site — light with teal accent)
+    ══════════════════════════════ */
+    .affiliation-bar {
+      background: var(--white);
+      border-bottom: 3px solid var(--teal);
+      padding: 0.55rem 4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .affiliation-bar span {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .affiliation-bar .sep {
+      color: #bbb;
+    }
+
+    .affiliation-bar a {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--blue);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .affiliation-bar a:hover {
+      text-decoration: underline;
+      color: var(--teal);
+    }
+
+    /* ══════════════════════════════
+       MAIN NAV (charcoal, like UN Stats)
+    ══════════════════════════════ */
+    nav {
+      background: #3d4f60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4rem;
+      height: 50px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 0;
+    }
+
+    .nav-links li a {
+      display: block;
+      padding: 0 1.2rem;
+      height: 50px;
+      line-height: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-links li a:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+    }
+
+    .nav-links li a.active {
+      color: var(--white);
+      border-bottom: 3px solid var(--teal);
+    }
+
+    /* ══════════════════════════════
+       HERO — split layout, larger
+    ══════════════════════════════ */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      min-height: 600px;
+      max-height: 700px;
+    }
+
+    /* Left: text panel */
+    .hero-text {
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4.5rem 4.5rem 4.5rem 5rem;
+      border-right: 1px solid var(--rule);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5vw, 5.2rem);
+      font-weight: 400;
+      line-height: 1.06;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-name .phd {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .hero-rule {
+      width: 44px;
+      height: 3px;
+      background: var(--teal);
+      margin: 1.4rem 0;
+    }
+
+    .hero-tagline {
+      font-size: 1.08rem;
+      font-weight: 300;
+      line-height: 1.78;
+      color: var(--ink);
+      max-width: 460px;
+    }
+
+    .hero-tagline strong {
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.9rem;
+      margin-top: 2.6rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.18s;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      border: 2px solid var(--blue);
+    }
+    .btn-primary:hover { background: var(--navy); border-color: var(--navy); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border: 2px solid var(--blue-light);
+    }
+    .btn-outline:hover { background: var(--sky); }
+
+    /* Right: photo panel */
+    .hero-photo {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 35% 18%;
+      display: block;
+    }
+
+    /* Placeholder if no photo yet */
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, #c8dff0 0%, #a8c8e0 100%);
+      color: var(--navy);
+      text-align: center;
+      padding: 2rem;
+      gap: 1.2rem;
+    }
+
+    .photo-placeholder .icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px dashed rgba(42,63,95,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      opacity: 0.5;
+    }
+
+    .photo-placeholder p {
+      font-size: 0.8rem;
+      opacity: 0.5;
+      font-style: italic;
+      line-height: 1.6;
+      max-width: 180px;
+    }
+
+    /* ══════════════════════════════
+       ABOUT STRIP
+    ══════════════════════════════ */
+    .about-strip {
+      background: var(--pale);
+      padding: 3.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .about-block h2 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .about-block p {
+      font-size: 0.97rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+
+    .about-block p + p {
+      margin-top: 0.9rem;
+    }
+
+    /* ══════════════════════════════
+       SECTION CARDS
+    ══════════════════════════════ */
+    .cards-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--navy);
+    }
+
+    .card {
+      padding: 2.8rem 3rem;
+      text-decoration: none;
+      color: inherit;
+      border-right: 1px solid rgba(255,255,255,0.09);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: background 0.2s;
+    }
+
+    .card:last-child { border-right: none; }
+    .card:hover { background: var(--navy-mid); }
+
+    .card-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .card h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: 0.87rem;
+      font-weight: 300;
+      color: rgba(220,235,245,0.7);
+      line-height: 1.65;
+    }
+
+    .card-arrow {
+      margin-top: auto;
+      padding-top: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+
+    .card:hover .card-arrow { gap: 0.7rem; }
+
+    /* ══════════════════════════════
+       RECENT PUBLICATIONS STRIP
+    ══════════════════════════════ */
+    .pubs-strip {
+      padding: 3.5rem 5rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .section-header a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .section-header a:hover { color: var(--navy); }
+
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .pub-item {
+      display: grid;
+      grid-template-columns: 3.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .pub-year {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--blue-light);
+      padding-top: 0.15rem;
+    }
+
+    .pub-text {
+      font-size: 0.93rem;
+      line-height: 1.6;
+      color: var(--ink);
+      font-weight: 300;
+    }
+
+    .pub-text em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    footer {
+      background: var(--navy);
+      padding: 2rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer .footer-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: rgba(212,228,247,0.6);
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 1.8rem;
+    }
+
+    footer .footer-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(212,228,247,0.4);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer .footer-links a:hover { color: rgba(212,228,247,0.85); }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; max-height: none; }
+      .hero-photo { height: 280px; }
+      .hero-text { padding: 3rem 2rem; }
+      .about-strip { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 2rem; }
+      .cards-row { grid-template-columns: 1fr; }
+      .card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .pubs-strip { padding: 2.5rem 2rem; }
+      nav, .affiliation-bar { padding: 0 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem; }
+      .nav-name { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Affiliation bar (two-tier, like UN Stats) ── -->
+  <div class="affiliation-bar">
+    <a href="https://wgalil.ac.il/" target="_blank" rel="noopener">Western Galilee College</a>
+    <span class="sep">|</span>
+    <span>Department of Criminology</span>
+    <span class="sep">|</span>
+    <span>Akko, Israel</span>
+  </div>
+
+  <!-- ── Navigation bar (like Twitch Dev) ── -->
+  <nav>
+    <a class="nav-name" href="index.html">Eran Zaidise</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Political Scientist &amp; Lecturer</p>
+      <h1 class="hero-name">
+        Eran Zaidise<br>
+        <span class="phd">Ph.D.</span>
+      </h1>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">
+        I study <strong>civic participation, political violence,</strong> and <strong>health policy</strong> — 
+        exploring how attitudes shape behavior in deeply divided societies.
+        Based at Western Galilee College, Akko.
+      </p>
+      <div class="hero-actions">
+        <a href="research.html" class="btn btn-primary">My Research</a>
+        <a href="about.html" class="btn btn-outline">About Me</a>
+      </div>
+    </div>
+
+    <!-- Replace this block with your photo once ready -->
+    <div class="hero-photo">
+        <img src="photo.jpg" alt="Eran Zaidise" />
+    </div>
+  </section>
+
+  <!-- ── Brief about section ── -->
+  <section class="about-strip">
+    <div class="about-block">
+      <h2>Research Interests</h2>
+      <p>My work sits at the intersection of political behavior, civil society, and public policy. I am particularly interested in why people choose — or refuse — to act: whether that means joining a protest, leaving a hospital without treatment, or supporting political violence.</p>
+      <p>My current projects examine the long-term wellbeing effects of the COVID-19 pandemic in Israel and France, and the political dynamics of health system behavior.</p>
+    </div>
+    <div class="about-block">
+      <h2>Academic Position</h2>
+      <p>I am a Lecturer at <strong>Western Galilee College</strong> in Akko, Israel, where I have taught since 2013. I hold a Ph.D. in Political Science from the University of Haifa (2008) and completed postdoctoral research at the University of Texas at Austin.</p>
+      <p>I teach across the Criminology, Multi-Disciplinary, and Management departments, and serve as Head of the Center for the Advancement of Teaching.</p>
+    </div>
+  </section>
+
+  <!-- ── Navigation cards (like Twitch's featured sections) ── -->
+  <div class="cards-row">
+    <a class="card" href="research.html">
+      <span class="card-tag">Scholarship</span>
+      <h3>Publications &amp; Research</h3>
+      <p>Peer-reviewed articles spanning political violence, civil society, health policy, and social protest — published in journals including <em>Political Studies</em> and <em>Journal of Peace Research</em>.</p>
+      <span class="card-arrow">View publications →</span>
+    </a>
+    <a class="card" href="teaching.html">
+      <span class="card-tag">Teaching</span>
+      <h3>Courses &amp; Materials</h3>
+      <p>I teach Research Methodology, Political Violence, War Crimes &amp; Genocide, and Introduction to Politics, among other courses. Course materials available to enrolled students.</p>
+      <span class="card-arrow">See courses →</span>
+    </a>
+  </div>
+
+  <!-- ── Selected recent publications ── -->
+  <section class="pubs-strip">
+    <div class="section-header">
+      <h2>Recent Publications</h2>
+      <a href="research.html">See all →</a>
+    </div>
+    <div class="pub-list">
+      <div class="pub-item">
+        <span class="pub-year">2025</span>
+        <p class="pub-text">Leck, Albo, Nathan, <strong>Zaidise</strong> &amp; Wolf. Exploring the Impact of Work Satisfaction, Generational Attributes and Resource Conservation on Voluntary and Involuntary Career Outcomes in the Aftermath of COVID-19. <em>The Career Development Quarterly, 73(4).</em></p>
+      </div>
+      <div class="pub-item">
+        <span class="pub-year">2025</span>
+        <p class="pub-text">Albo, Leck, Nathan, Wolf &amp; <strong>Zaidise</strong>. COR and CORONA: Analysis of COVID-19's subjective lasting impact on wellbeing, employing conservation of resources theory. <em>Journal of Public Health, 47(3).</em></p>
+      </div>
+      <div class="pub-item">
+        <span class="pub-year">2022</span>
+        <p class="pub-text">Rosman, <strong>Zaidise</strong> &amp; Stanleigh. Medical care of military personnel during conflict and routine situations in civilian hospitals. <em>Israel Affairs, 28(3).</em></p>
+      </div>
+      <div class="pub-item">
+        <span class="pub-year">2018</span>
+        <p class="pub-text"><strong>Zaidise</strong>, Shahrabani, Gal &amp; Benzion. Understanding public support for social protest: Testing collective action frames in the Israeli 2011 summer protest. <em>Israeli Affairs, 25(5).</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <span class="footer-name">Eran Zaidise, Ph.D.</span>
+    <nav class="footer-links">
+      <a href="about.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+</html>

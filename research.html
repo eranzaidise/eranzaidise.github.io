@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research — Eran Zaidise, Ph.D.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #2a3f5f;
+      --navy-mid:  #3a5078;
+      --blue:      #1a6fa8;
+      --blue-light:#3a8fc4;
+      --teal:      #00a3b4;
+      --sky:       #ddf0f5;
+      --pale:      #f5f8fb;
+      --white:     #ffffff;
+      --ink:       #222830;
+      --muted:     #5a6a7a;
+      --warm:      #e07b20;
+      --rule:      #d8e4ec;
+      --serif: 'Libre Baskerville', Georgia, serif;
+      --sans: 'Source Sans 3', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    /* ── Affiliation bar ── */
+    .affiliation-bar {
+      background: var(--white);
+      border-bottom: 3px solid var(--teal);
+      padding: 0.55rem 4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .affiliation-bar span {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .affiliation-bar .sep { color: #bbb; }
+
+    .affiliation-bar a {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--blue);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .affiliation-bar a:hover {
+      text-decoration: underline;
+      color: var(--teal);
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: #3d4f60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4rem;
+      height: 50px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      display: block;
+      padding: 0 1.2rem;
+      height: 50px;
+      line-height: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-links li a:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+    }
+
+    .nav-links li a.active {
+      color: var(--white);
+      border-bottom: 3px solid var(--teal);
+    }
+
+    /* ── Page banner ── */
+    .page-banner {
+      background: var(--pale);
+      border-bottom: 1px solid var(--rule);
+      padding: 3rem 5rem;
+    }
+
+    .page-banner .breadcrumb {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-banner h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.1;
+    }
+
+    .page-banner .banner-sub {
+      margin-top: 0.9rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    .scholar-btn {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 2px solid var(--blue-light);
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .scholar-btn:hover {
+      background: var(--sky);
+      color: var(--navy);
+    }
+
+    /* ── Photo strip ── */
+    .photo-strip {
+      width: 100%;
+      max-height: 380px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-strip img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+
+    .photo-caption {
+      background: var(--pale);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.55rem 5rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Body layout: sticky sidebar + main content ── */
+    .page-body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 5rem;
+      gap: 0;
+      align-items: start;
+    }
+
+    /* ── Sticky sidebar TOC ── */
+    .sidebar {
+      position: sticky;
+      top: 70px;
+      padding-right: 2.5rem;
+      border-right: 1px solid var(--rule);
+    }
+
+    .sidebar-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .sidebar-nav li a {
+      display: block;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+
+    .sidebar-nav li a:hover {
+      color: var(--navy);
+      border-left-color: var(--blue-light);
+      background: var(--pale);
+    }
+
+    .sidebar-nav li a.toc-active {
+      color: var(--navy);
+      font-weight: 600;
+      border-left-color: var(--teal);
+      background: var(--sky);
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--rule);
+      margin: 0.8rem 0;
+    }
+
+    .sidebar-nav .toc-sub {
+      padding-left: 1.5rem;
+      font-size: 0.78rem;
+    }
+
+    /* ── Main content ── */
+    .main-content {
+      padding-left: 4rem;
+    }
+
+    /* ── Research summary strip ── */
+    .research-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .stat-box {
+      background: var(--pale);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--teal);
+      padding: 1.2rem 1.5rem;
+      border-radius: 2px;
+    }
+
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Section headers ── */
+    .section-block {
+      margin-bottom: 4rem;
+      scroll-margin-top: 80px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 2px solid var(--sky);
+    }
+
+    .section-intro {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
+    }
+
+    /* ── Publication entry ── */
+    .pub-entry {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+
+    .pub-entry:last-child { border-bottom: none; }
+
+    .pub-year {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--blue-light);
+      padding-top: 0.2rem;
+      text-align: right;
+    }
+
+    .pub-body {
+      font-size: 0.93rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .pub-body .pub-title {
+      font-style: italic;
+      color: var(--navy);
+    }
+
+    .pub-body .pub-journal {
+      color: var(--muted);
+    }
+
+    .pub-body .pub-author-me {
+      font-weight: 600;
+    }
+
+    .pub-tag {
+      display: inline-block;
+      margin-top: 0.4rem;
+      padding: 0.15rem 0.55rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      background: var(--sky);
+      color: var(--teal);
+    }
+
+    .pub-tag.tag-hebrew { background: #fff3e8; color: #c06010; }
+    .pub-tag.tag-chapter { background: #eaf0f8; color: var(--navy-mid); }
+    .pub-tag.tag-proceedings { background: #f0f5ef; color: #3a6e3a; }
+
+    /* ── Grant entries ── */
+    .grant-entry {
+      padding: 1.3rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .grant-entry:last-child { border-bottom: none; }
+
+    .grant-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .grant-years {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--blue-light);
+      white-space: nowrap;
+    }
+
+    .grant-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+
+    .grant-meta {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 0.4rem;
+    }
+
+    .grant-meta strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .grant-amount {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.2rem 0.65rem;
+      background: var(--pale);
+      border: 1px solid var(--rule);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--navy);
+      border-radius: 2px;
+    }
+
+    /* ── Areas of specialization ── */
+    .areas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .area-card {
+      padding: 1.2rem 1.5rem;
+      background: var(--pale);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 2px 2px 0;
+    }
+
+    .area-card h4 {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .area-card p {
+      font-size: 0.83rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--navy);
+      padding: 2rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+
+    footer .footer-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: rgba(212,228,247,0.6);
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 1.8rem;
+    }
+
+    footer .footer-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(212,228,247,0.4);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer .footer-links a:hover { color: rgba(212,228,247,0.85); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .affiliation-bar, nav, .page-banner, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .page-body { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; }
+      .sidebar { display: none; }
+      .main-content { padding-left: 0; }
+      .research-summary { grid-template-columns: 1fr 1fr; }
+      .areas-grid { grid-template-columns: 1fr; }
+      .nav-name { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Affiliation bar -->
+  <div class="affiliation-bar">
+    <a href="https://wgalil.ac.il/" target="_blank" rel="noopener">Western Galilee College</a>
+    <span class="sep">|</span>
+    <span>Department of Criminology</span>
+    <span class="sep">|</span>
+    <span>Akko, Israel</span>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-name" href="index.html">Eran Zaidise</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="research.html" class="active">Research</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page banner -->
+  <div class="page-banner">
+    <p class="breadcrumb">Research</p>
+    <h1>Publications &amp; Research</h1>
+    <p class="banner-sub">My research centers on civic participation, political violence, and health politics — exploring how attitudes translate into action in deeply divided societies.</p>
+    <a href="https://scholar.google.com/citations?user=cpJIdUIAAAAJ&hl=en" target="_blank" rel="noopener" class="scholar-btn">View on Google Scholar →</a>
+  </div>
+
+  <!-- Photo strip -->
+  <div class="photo-strip">
+    <img src="photo_research.jpg" alt="University library" />
+  </div>
+  <p class="photo-caption">Image generated with Google Gemini's Nano Banana 2.</p>
+
+  <!-- Main layout -->
+  <div class="page-body">
+
+    <!-- Sticky sidebar TOC -->
+    <aside class="sidebar">
+      <p class="sidebar-label">On this page</p>
+      <ul class="sidebar-nav" id="toc">
+        <li><a href="#overview">Research Overview</a></li>
+        <div class="sidebar-divider"></div>
+        <li><a href="#journals">Journal Articles</a></li>
+        <li><a href="#chapters">Book Chapters</a></li>
+        <li><a href="#proceedings">Conference Proceedings</a></li>
+        <li><a href="#other-pubs">Other Publications</a></li>
+        <div class="sidebar-divider"></div>
+        <li><a href="#grants">Research Grants</a></li>
+        <div class="sidebar-divider"></div>
+        <li><a href="https://scholar.google.com/citations?user=cpJIdUIAAAAJ&hl=en" target="_blank" rel="noopener" style="color: var(--blue); font-weight: 500;">Google Scholar ↗</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <div class="main-content">
+
+      <!-- Stats -->
+      <div class="research-summary">
+        <div class="stat-box">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Refereed Articles</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Research Grants</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">2025</div>
+          <div class="stat-label">Most Recent Publication</div>
+        </div>
+      </div>
+
+      <!-- Research Overview -->
+      <div class="section-block" id="overview">
+        <h2 class="section-title">Research Overview</h2>
+        <div class="areas-grid">
+          <div class="area-card">
+            <h4>Civic Participation &amp; Civil Society</h4>
+            <p>How civic associations shape political attitudes, policy, and public satisfaction — from health systems to social protest.</p>
+          </div>
+          <div class="area-card">
+            <h4>Political Violence &amp; Extremism</h4>
+            <p>The role of religion, deprivation, and ideology in predicting support for political violence in divided societies.</p>
+          </div>
+          <div class="area-card">
+            <h4>Health Politics &amp; Policy</h4>
+            <p>Why people deviate from expected health behaviors, and how political institutions shape healthcare decision-making.</p>
+          </div>
+          <div class="area-card">
+            <h4>Democratic Resilience</h4>
+            <p>Existential threats to democratic regimes and the conditions under which civil resistance succeeds or fails.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Refereed Journal Articles -->
+      <div class="section-block" id="journals">
+        <h2 class="section-title">Articles in Refereed Journals</h2>
+        <p class="section-intro">Listed in reverse chronological order. My name appears in bold.</p>
+
+        <div class="pub-entry">
+          <span class="pub-year">2025</span>
+          <p class="pub-body">Leck, E., Albo, Y., Nathan, O., <span class="pub-author-me">Zaidise, E.</span>, &amp; Wolf, N. Exploring the Impact of Work Satisfaction, Generational Attributes and Resource Conservation on Voluntary and Involuntary Career Outcomes in the Aftermath of the COVID&#8209;19 Pandemic. <span class="pub-journal"><em>The Career Development Quarterly</em>, 73(4), 257–272.</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2025</span>
+          <p class="pub-body">Albo, Y., Leck, E., Nathan, O., Wolf, N., &amp; <span class="pub-author-me">Zaidise, E.</span> COR and CORONA: Analysis of COVID-19's subjective lasting impact on wellbeing, employing conservation of resources theory. <span class="pub-journal"><em>Journal of Public Health</em>, 47(3), 637–645.</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2022</span>
+          <p class="pub-body">Rosman, E., <span class="pub-author-me">Zaidise, E.</span>, &amp; Stanleigh, J. Medical care of military personnel during conflict and routine situations in civilian hospitals. <span class="pub-journal"><em>Israel Affairs</em>, 28(3), 464–483.</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2018</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span>, Shahrabani, S., Gal, A., &amp; Benzion, U. Understanding public support for social protest: Testing collective action frames, cognitive liberation and political opportunity in the Israeli 2011 summer protest. <span class="pub-journal"><em>Israeli Affairs</em>, 25(5), 865–882.</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2015</span>
+          <p class="pub-body">Benzion, U., Gal, A., Shahrabani, S., &amp; <span class="pub-author-me">Zaidise, E.</span> The Price of Freedom. Factors Affecting Public Support For the Release of a Captive Soldier: The Case of Gilad Shalit. <span class="pub-journal"><em>Economics Bulletin</em>, 35(4), 2184–2196.</span> <span class="pub-tag">Equal contribution; alphabetical order</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2015</span>
+          <p class="pub-body">Perliger, A., &amp; <span class="pub-author-me">Zaidise, E.</span> The peculiar victory of the national camp in the 2013 Israeli Election. <span class="pub-journal"><em>Israel Affairs</em>, 21(2), 195–208.</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2010</span>
+          <p class="pub-body">Canetti-Nisim, D., Hobfoll, S., Pedahzur, A., &amp; <span class="pub-author-me">Zaidise, E.</span> Much ado about religiosity: The association of religiosity, resource loss, and support for political violence. <span class="pub-journal"><em>Journal of Peace Research</em>, 47(5), 575–587.</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2010</span>
+          <p class="pub-body">Pedahzur, A., Perliger, A., &amp; <span class="pub-author-me">Zaidise, E.</span> The nature of existential threats to democracies. <span class="pub-journal"><em>Politika</em>, 20, 39–54.</span> <span class="pub-tag tag-hebrew">Hebrew</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2008</span>
+          <p class="pub-body">Ben-Dor, G., Pedahzur, A., Canetti-Nisim, D., <span class="pub-author-me">Zaidise, E.</span>, Perliger, A., &amp; Bermanis, S. I versus we: Collective and individual factors of reserve service motivation during war and peace. <span class="pub-journal"><em>Armed Forces &amp; Society</em>, 34(4), 565–592.</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2008</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span> The democratic role, function and effect of civil society in times of war: Learning from the Israeli experience. <span class="pub-journal"><em>Democracy and Society</em>, 4(1), 69–85.</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2007</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span>, Canetti-Nisim, D., &amp; Pedahzur, A. Politics of god or politics of man? The role of religion and deprivation in predicting support for political violence in Israel. <span class="pub-journal"><em>Political Studies</em>, 55(3), 499–521.</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2004</span>
+          <p class="pub-body">Canetti-Nisim, D., <span class="pub-author-me">Zaidise, E.</span>, &amp; Pedahzur, A. Militant attitudes among Israelis throughout the Al-Aqsa Intifada. <span class="pub-journal"><em>The Palestine-Israel Journal</em>, 11(3,4), 104–111.</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2004</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span> Book Review: Being Israeli — The Dynamics of Multiple Citizenship. Gershon Shafir &amp; Yoav Peled (2002). Cambridge University Press. <span class="pub-journal"><em>State and Society</em>, 2(3), 469–470.</span> <span class="pub-tag tag-hebrew">Hebrew</span></p>
+        </div>
+      </div>
+
+      <!-- Book Chapters -->
+      <div class="section-block" id="chapters">
+        <h2 class="section-title">Articles and Chapters in Scientific Books</h2>
+
+        <div class="pub-entry">
+          <span class="pub-year">2009</span>
+          <p class="pub-body">Pedahzur, A., Perliger, A., &amp; <span class="pub-author-me">Zaidise, E.</span> The nature of existential threats to democracies. In G. Sheffer &amp; O. Barak (Eds.), <em>Existential Threats</em> (pp. 61–78). Lexington, MA: Lexington Press. <span class="pub-tag tag-chapter">Book Chapter</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2002</span>
+          <p class="pub-body">Ben-Dor, G., Pedahzur, A., Perliger, A., &amp; <span class="pub-author-me">Zaidise, E.</span> Are they vigilant? A quantitative comparison of the support for political violence among Israelis within and beyond the Green Line. <em>Judea and Samaria Studies, the 12th Collection</em>. Ariel: The College Judea and Samaria. <span class="pub-tag tag-chapter">Book Chapter</span></p>
+        </div>
+      </div>
+
+      <!-- Conference Proceedings -->
+      <div class="section-block" id="proceedings">
+        <h2 class="section-title">Articles in Conference Proceedings</h2>
+
+        <div class="pub-entry">
+          <span class="pub-year">2018</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span>, Shahrabani, S., Benzion, U., &amp; Gal, A. Understanding Public Support for Social Protest: Lessons from the Israeli 2011 Tent Protest. <em>The 36th Annual Meeting of the International Society of Political Psychology (ISPP)</em>, IDC, Herzliya, Israel, July 8–11, 2018. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2011</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span>, &amp; Davis, W. Connecting geographically distant students in virtual space. <em>Bridges Workshop: Forging American-Israeli Academic Collaborations</em>, Westminster College, PA, USA, Sep. 18–23, 2011. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2008</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span> How civic organizations influence policy: The effect of functional roles. <em>ISTR 8th International Conference</em>, Barcelona, Spain, July 9–12, 2008. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2005</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span> More Democratic Health Systems: The Role of Third Sector Organizations in the Israeli Health System. <em>Annual Meeting of the Israeli Association for Political Science</em>, Academic College of Tel Aviv-Jaffa, May 26, 2005. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2004</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span> The Role of Civil Society in Developing and Consolidating Democracy: Evidence from Israel. <em>ECPR Joint Sessions of Workshops, Workshop No. 8: The Changing Structure of Civil Society</em>, Uppsala, Sweden, April 13–18, 2004. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2004</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span> Roles and Effectiveness of Health Orientated Civil Society Organizations: Primary Findings from Israel. <em>7th Annual Spring Conference of the Israeli Center for Third Sector Research</em>, Caesar Premier Hotel, Dead Sea, March 17–18, 2004. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2002</span>
+          <p class="pub-body">Pedahzur, A., Canetti-Nisim, D., &amp; <span class="pub-author-me">Zaidise, E.</span> A Model for Explaining Support for Political Violence in a Deeply Divided Society. <em>25th Annual Scientific Meeting, International Society of Political Psychology</em>, Berlin, Germany, July 16, 2002. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2002</span>
+          <p class="pub-body">Ben-Dor, G., Pedahzur, A., Canetti-Nisim, D., &amp; <span class="pub-author-me">Zaidise, E.</span> Fear and Terror: Counter Productive Effects of Terrorism. <em>25th Annual Scientific Meeting, International Society of Political Psychology</em>, Berlin, Germany, July 19, 2002. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2002</span>
+          <p class="pub-body">Pedahzur, A., Perliger, A., &amp; <span class="pub-author-me">Zaidise, E.</span> Israeli Struggle Against Palestinian Terrorism: 1948–2002. <em>National Security Studies Center, Conference on Terrorism and Counter-terrorism</em>, June 4, 2002. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2002</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span>, &amp; Perliger, A. The Motivation to Serve in the Reserve Army: 2000 versus 2002. <em>Annual Meeting of the Israeli Political Science Association</em>, Tel Aviv, June 20, 2002. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2002</span>
+          <p class="pub-body"><span class="pub-author-me">Zaidise, E.</span>, &amp; Perliger, A. Vigilante's Violence: A Quantitative Assessment of Jewish Settler's Political Violence. <em>Judea and Samaria 12th Conference</em>, Judea and Samaria Academic College, Ariel, April 25, 2002. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+
+        <div class="pub-entry">
+          <span class="pub-year">2002</span>
+          <p class="pub-body">Pedahzur, A., &amp; <span class="pub-author-me">Zaidise, E.</span> Israel's Defending Democracy: The Role of Civil Society. <em>3rd Annual Spring Conference of the Israeli Center for Third Sector Research</em>, Dead Sea Hayat Hotel, March 20, 2002. <span class="pub-tag tag-proceedings">Proceedings</span></p>
+        </div>
+      </div>
+
+      <!-- Other Publications -->
+      <div class="section-block" id="other-pubs">
+        <h2 class="section-title">Other Scientific Publications</h2>
+
+        <div class="pub-entry">
+          <span class="pub-year">2009</span>
+          <p class="pub-body">Pedahzur, A., &amp; <span class="pub-author-me">Zaidise, E.</span> Weak democratic states and reactions to extremism. <em>APSA 2009 Toronto Meeting Paper</em>. Published on the Social Science Research Network (SSRN). <a href="http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1449031" target="_blank" rel="noopener" style="color: var(--blue); font-size: 0.82rem;">View on SSRN →</a></p>
+        </div>
+      </div>
+
+      <!-- Research Grants -->
+      <div class="section-block" id="grants">
+        <h2 class="section-title">Research Grants</h2>
+        <p class="section-intro">All grants awarded by the Israel National Institute for Health Policy Research and partner agencies.</p>
+
+        <div class="grant-entry">
+          <div class="grant-header">
+            <span class="grant-years">2021–2023</span>
+            <div class="grant-title">Winners and Losers of the Covid-19 Pandemic in Israel and France: Evaluating the Long-Term Effects of the Crisis on Wellbeing</div>
+          </div>
+          <div class="grant-meta">
+            <strong>Role:</strong> Co-researcher &nbsp;|&nbsp; <strong>PI:</strong> Eran Leck &nbsp;|&nbsp; <strong>Co-researchers:</strong> Yael Albo, Orly Natan
+          </div>
+          <div class="grant-meta"><strong>Funded by:</strong> Ministry of Science and Technology (MOST, Israel) / Ministry of Europe and Foreign Affairs (MEAE) and Ministry of Higher Education, Research and Innovation (MESRI, France)</div>
+          <span class="grant-amount">320,000 NIS</span>
+        </div>
+
+        <div class="grant-entry">
+          <div class="grant-header">
+            <span class="grant-years">2017–2019</span>
+            <div class="grant-title">Patients who leave the ER without being seen: Characteristics and explanations</div>
+          </div>
+          <div class="grant-meta">
+            <strong>Role:</strong> PI &nbsp;|&nbsp; <strong>Co-researcher:</strong> Benidor Raviv
+          </div>
+          <div class="grant-meta"><strong>Funded by:</strong> Israel National Institute for Health Policy Research</div>
+          <span class="grant-amount">191,620 NIS</span>
+        </div>
+
+        <div class="grant-entry">
+          <div class="grant-header">
+            <span class="grant-years">2012–2013</span>
+            <div class="grant-title">Limitations to competition in Israel's universal health insurance market, and the conditions for their removal</div>
+          </div>
+          <div class="grant-meta">
+            <strong>Role:</strong> Co-researcher &nbsp;|&nbsp; <strong>PI:</strong> Uri Ben Zion
+          </div>
+          <div class="grant-meta"><strong>Funded by:</strong> Israel National Institute for Health Policy Research</div>
+          <span class="grant-amount">109,835 NIS (~$30,500)</span>
+        </div>
+
+        <div class="grant-entry">
+          <div class="grant-header">
+            <span class="grant-years">2003–2004</span>
+            <div class="grant-title">The role and effectiveness of civic organizations in promoting public satisfaction from the Israeli health system</div>
+          </div>
+          <div class="grant-meta">
+            <strong>Role:</strong> Co-researcher &nbsp;|&nbsp; <strong>PI:</strong> Yael Yishai
+          </div>
+          <div class="grant-meta"><strong>Funded by:</strong> Israel National Institute for Health Policy Research</div>
+          <span class="grant-amount">76,000 NIS (~$17,000)</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-name">Eran Zaidise, Ph.D.</span>
+    <nav class="footer-links">
+      <a href="about.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
+
+  <script>
+    // Highlight active TOC link on scroll
+    const sections = document.querySelectorAll('.section-block');
+    const tocLinks = document.querySelectorAll('#toc a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('toc-active'));
+          const id = entry.target.getAttribute('id');
+          const active = document.querySelector(`#toc a[href="#${id}"]`);
+          if (active) active.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -60% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
