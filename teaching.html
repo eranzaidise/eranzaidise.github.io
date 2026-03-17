@@ -32,8 +32,16 @@
 
     body {
       font-family: var(--sans);
-      background: var(--white);
+      background: #eef2f5;
       color: var(--ink);
+    }
+
+    .page-card {
+      margin: 1.5rem 2rem;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 4px 24px rgba(42,63,95,0.08);
     }
 
     /* ── Affiliation bar ── */
@@ -446,7 +454,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 2rem;
+      margin: 0 2rem 2rem;
+      border-radius: 16px;
     }
 
     footer .footer-name {
@@ -474,14 +483,15 @@
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      .affiliation-bar, nav, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .affiliation-bar, nav { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .page-card { margin: 1rem; }
       .page-banner { padding: 2.5rem 1.5rem; }
       .photo-caption { padding-left: 1.5rem; padding-right: 1.5rem; }
       .page-body { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; }
       .sidebar { position: static; border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 1.5rem; margin-bottom: 2rem; }
       .main-content { padding-left: 0; }
       .nav-name { display: none; }
-      footer { flex-direction: column; gap: 1rem; padding: 2rem; }
+      footer { margin: 0 1rem 1rem; padding: 1.5rem; border-radius: 12px; flex-direction: column; gap: 1rem; }
       .course-table thead th:nth-child(3),
       .course-table tbody td:nth-child(3) { display: none; }
     }
@@ -510,6 +520,7 @@
     </ul>
   </nav>
 
+  <div class="page-card">
   <!-- Page banner -->
   <div class="page-banner">
     <p class="breadcrumb">Teaching</p>
@@ -709,7 +720,7 @@
       </div>
 
     </div>
-  </div>
+  </div><!-- end page-card -->
 
   <!-- Footer -->
   <footer>
