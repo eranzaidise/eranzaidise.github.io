@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Eran Zaidise, Ph.D.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #2a3f5f;
+      --navy-mid:  #3a5078;
+      --blue:      #1a6fa8;
+      --blue-light:#3a8fc4;
+      --teal:      #00a3b4;
+      --sky:       #ddf0f5;
+      --pale:      #f5f8fb;
+      --white:     #ffffff;
+      --ink:       #222830;
+      --muted:     #5a6a7a;
+      --warm:      #e07b20;
+      --rule:      #d8e4ec;
+      --serif: 'Libre Baskerville', Georgia, serif;
+      --sans: 'Source Sans 3', sans-serif;
+
+      /* category colors */
+      --cat-research:  #00a3b4;
+      --cat-teaching:  #1a6fa8;
+      --cat-events:    #e07b20;
+      --cat-technology:#3a5078;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: #eef2f5;
+      color: var(--ink);
+    }
+
+    /* ── Affiliation bar ── */
+    .affiliation-bar {
+      background: var(--white);
+      border-bottom: 3px solid var(--teal);
+      padding: 0.55rem 4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .affiliation-bar span {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .affiliation-bar .sep { color: #bbb; }
+    .affiliation-bar a {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--blue);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .affiliation-bar a:hover { text-decoration: underline; color: var(--teal); }
+
+    /* ── Nav ── */
+    nav {
+      background: #3d4f60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4rem;
+      height: 50px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    .nav-links li a {
+      display: block;
+      padding: 0 1.2rem;
+      height: 50px;
+      line-height: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-links li a:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+    .nav-links li a.active { color: var(--white); border-bottom: 3px solid var(--teal); }
+
+    /* ── Page card ── */
+    .page-card {
+      margin: 1.5rem 2rem;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 4px 24px rgba(42,63,95,0.08);
+    }
+
+    /* ── Page banner ── */
+    .page-banner {
+      background: var(--pale);
+      border-bottom: 1px solid var(--rule);
+      padding: 3rem 5rem;
+    }
+    .page-banner .breadcrumb {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.8rem;
+    }
+    .page-banner h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.1;
+    }
+    .page-banner .banner-sub {
+      margin-top: 0.7rem;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Main layout ── */
+    .page-body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3.5rem 5rem 4rem;
+    }
+
+    /* ── Section heading shared style ── */
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+    .section-heading h2 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    /* ── Category filter bar ── */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      background: var(--pale);
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--teal); color: var(--teal); }
+    .filter-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .filter-btn[data-cat="research"].active    { background: var(--cat-research); border-color: var(--cat-research); }
+    .filter-btn[data-cat="teaching"].active    { background: var(--cat-teaching); border-color: var(--cat-teaching); }
+    .filter-btn[data-cat="events"].active      { background: var(--cat-events);   border-color: var(--cat-events); }
+    .filter-btn[data-cat="technology"].active  { background: var(--cat-technology); border-color: var(--cat-technology); }
+
+    /* ── Category tags (on cards and list items) ── */
+    .cat-tag {
+      display: inline-block;
+      padding: 0.18rem 0.65rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      color: var(--white);
+    }
+    .cat-tag[data-cat="research"]   { background: var(--cat-research); }
+    .cat-tag[data-cat="teaching"]   { background: var(--cat-teaching); }
+    .cat-tag[data-cat="events"]     { background: var(--cat-events); }
+    .cat-tag[data-cat="technology"] { background: var(--cat-technology); }
+
+    /* ── Recent posts grid ── */
+    .recent-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .post-card {
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 2rem 2.2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.18s, border-color 0.18s, transform 0.18s;
+      background: var(--white);
+    }
+    .post-card:hover {
+      box-shadow: 0 6px 24px rgba(42,63,95,0.1);
+      border-color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .post-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .post-date {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .post-read-time {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .post-read-time::before { content: '·'; margin-right: 0.7rem; }
+
+    .post-card h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.35;
+    }
+    .post-card:hover h3 { color: var(--blue); }
+
+    .post-excerpt {
+      font-size: 0.96rem;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--muted);
+      flex-grow: 1;
+    }
+
+    .post-card-footer {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .post-card:hover .post-card-footer { color: var(--teal); }
+
+    /* ── Archive section ── */
+    .archive-divider {
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: 3rem;
+    }
+
+    .archive-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .archive-item {
+      display: grid;
+      grid-template-columns: 6.5rem 1fr auto;
+      gap: 1rem 1.5rem;
+      align-items: baseline;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.12s;
+    }
+    .archive-item:first-child { border-top: 1px solid var(--rule); }
+    .archive-item:hover { background: var(--pale); margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; }
+
+    .archive-date {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .archive-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+    .archive-item:hover .archive-title { color: var(--blue); }
+
+    .archive-tag-wrap {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* ── Hidden items (filtered) ── */
+    .post-card.hidden,
+    .archive-item.hidden { display: none; }
+
+    /* ── Empty state ── */
+    .empty-state {
+      display: none;
+      text-align: center;
+      padding: 3rem 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--navy);
+      padding: 2rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 2rem 2rem;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    footer * { background: transparent !important; }
+    footer .footer-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #ffffff;
+    }
+    footer .footer-links {
+      display: flex;
+      gap: 1.8rem;
+      margin: 0;
+      padding: 0;
+    }
+    footer .footer-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    footer .footer-links a:hover { color: #ffffff; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .affiliation-bar, nav { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .page-card { margin: 1rem; }
+      .page-banner { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .page-body { padding: 2.5rem 1.5rem; }
+      .recent-grid { grid-template-columns: 1fr; }
+      .archive-item { grid-template-columns: 5rem 1fr; }
+      .archive-tag-wrap { display: none; }
+      .nav-name { display: none; }
+      footer { margin: 0 1rem 1rem; padding: 1.5rem; border-radius: 12px; flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Affiliation bar -->
+  <div class="affiliation-bar">
+    <a href="https://wgalil.ac.il/" target="_blank" rel="noopener">Western Galilee College</a>
+    <span class="sep">|</span>
+    <span>Department of Criminology</span>
+    <span class="sep">|</span>
+    <span>Akko, Israel</span>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-name" href="index.html">Eran Zaidise</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-card">
+
+    <!-- Page banner -->
+    <div class="page-banner">
+      <p class="breadcrumb">Blog</p>
+      <h1>Notes &amp; Reflections</h1>
+      <p class="banner-sub">Occasional writing on research, teaching, current events, and the intersections between them.</p>
+    </div>
+
+    <!-- Main content -->
+    <div class="page-body">
+
+      <!-- Category filter -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-cat="all">All posts</button>
+        <button class="filter-btn" data-cat="research">Research</button>
+        <button class="filter-btn" data-cat="teaching">Teaching</button>
+        <button class="filter-btn" data-cat="events">Current Events</button>
+        <button class="filter-btn" data-cat="technology">Technology</button>
+      </div>
+
+      <!-- Recent posts -->
+      <div class="section-heading">
+        <h2>Recent Posts</h2>
+      </div>
+
+      <div class="recent-grid" id="recent-grid">
+
+        <!-- POST: Did Claude Just Win the LLM Race for Me? -->
+        <a class="post-card" href="posts/claude-llm-race.html" data-cat="technology">
+          <div class="post-card-meta">
+            <span class="cat-tag" data-cat="technology">Technology</span>
+            <span class="post-date">March 2026</span>
+            <span class="post-read-time">2 min read</span>
+          </div>
+          <h3>Did Claude Just Win the LLM Race for Me?</h3>
+          <p class="post-excerpt">A reflection on building this website, discovering what AI can actually do, and why I am not entirely sure how to feel about it.</p>
+          <span class="post-card-footer">Read more →</span>
+        </a>
+
+      </div>
+
+      <!-- Archive -->
+      <div class="archive-divider"></div>
+
+      <div class="section-heading">
+        <h2>All Posts</h2>
+      </div>
+
+      <div class="archive-list" id="archive-list">
+
+        <a class="archive-item" href="posts/claude-llm-race.html" data-cat="technology">
+          <span class="archive-date">Mar 2026</span>
+          <span class="archive-title">Did Claude Just Win the LLM Race for Me?</span>
+          <span class="archive-tag-wrap"><span class="cat-tag" data-cat="technology">Technology</span></span>
+        </a>
+
+      </div>
+
+      <p class="empty-state" id="empty-state">No posts in this category yet.</p>
+
+    </div>
+  </div><!-- end page-card -->
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-name">Eran Zaidise, Ph.D.</span>
+    <nav class="footer-links">
+      <a href="about.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
+
+  <script>
+    // Category filtering
+    const filterBtns  = document.querySelectorAll('.filter-btn');
+    const recentCards = document.querySelectorAll('#recent-grid .post-card');
+    const archiveItems= document.querySelectorAll('#archive-list .archive-item');
+    const emptyState  = document.getElementById('empty-state');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.cat;
+
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter cards
+        let visibleCount = 0;
+        recentCards.forEach(card => {
+          const match = cat === 'all' || card.dataset.cat === cat;
+          card.classList.toggle('hidden', !match);
+          if (match) visibleCount++;
+        });
+        archiveItems.forEach(item => {
+          const match = cat === 'all' || item.dataset.cat === cat;
+          item.classList.toggle('hidden', !match);
+        });
+
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      });
+    });
+  </script>
+
+</body>
+</html>
